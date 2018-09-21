@@ -39,7 +39,9 @@ public class DashboardDAOImpl implements DashboardDAO{
 
 	@Override
 	public List<Object[]> getProducts() {
-		Query query = entityManager.createNativeQuery("SELECT CHILD_TIER, sum(TRUE_USAGE) AS ACTUAL_PRODUCT FROM USAGE_DATA GROUP BY CHILD_TIER ORDER BY ACTUAL_PRODUCT DESC");
+//		Query query = entityManager.createNativeQuery("SELECT CHILD_TIER, sum(TRUE_USAGE) AS ACTUAL_PRODUCT FROM USAGE_DATA GROUP BY CHILD_TIER ORDER BY ACTUAL_PRODUCT DESC");
+		Query query = entityManager.createNativeQuery("SELECT CHILD_TIER, sum(TRUE_USAGE) FROM USAGE_DATA  where CHILD_TIER NOT LIKE 'Autonomous%' GROUP BY CHILD_TIER UNION SELECT 'Autonomous', sum(TRUE_USAGE) "
+														+ "AS Autonomous FROM USAGE_DATA WHERE CHILD_TIER LIKE 'Autonomous%' ORDER BY 2 DESC");
 		List<Object[]> results = query.getResultList();
 		return results;
 	}

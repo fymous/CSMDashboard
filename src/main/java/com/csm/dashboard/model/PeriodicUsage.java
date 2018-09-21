@@ -3,6 +3,14 @@ package com.csm.dashboard.model;
 public class PeriodicUsage {
 	private String name;
 	private String value;
+	
+	public PeriodicUsage(String name,String value) {
+		this.name=name;
+		this.value=value;
+	}
+	public PeriodicUsage() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getName() {
 		return name;
 	}
